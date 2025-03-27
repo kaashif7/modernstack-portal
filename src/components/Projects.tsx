@@ -2,14 +2,14 @@
 import { useState } from "react";
 import ProjectCard from "./ProjectCard";
 import { Button } from "@/components/ui/button";
-import { BadgeCheck, Monitor, Server, RefreshCcw, Filter } from "lucide-react";
+import { BadgeCheck, Monitor, Server, RefreshCcw, Filter, Code, Database, Briefcase, FolderGit2 } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 // Define the main project data with more detailed information
-const projects = [
+const professionalProjects = [
   {
     title: "Insurance Management System",
-    description: "An online portal where insurance agents onboard customers as leads, generate quotations from multiple providers, and allow users to compare and choose the best insurance plan.",
+    description: "Enterprise platform for insurance agents to manage leads, generate and compare quotations, and onboard customers.",
     role: "Backend Developer",
     category: "backend",
     tech: [
@@ -26,24 +26,24 @@ const projects = [
       { name: "Postman" },
       { name: "DBeaver" }
     ],
-    detailedDescription: "This insurance management system streamlines the process of generating and comparing insurance quotes from multiple providers. It helps agents efficiently onboard customers and allows users to make informed decisions by comparing various insurance plans.",
+    detailedDescription: "A secure insurance management platform designed to streamline the process of lead management and quote generation. The system allows insurance agents to efficiently onboard customers and provide competitive quotes from multiple providers.",
     responsibilities: [
-      "Developed RESTful APIs for customer onboarding and lead management",
-      "Implemented secure authentication using JWT tokens",
-      "Created automated testing using Playwright",
-      "Designed and optimized PostgreSQL database schemas",
-      "Integrated with multiple insurance provider APIs"
+      "Developed RESTful APIs for user authentication and management",
+      "Implemented secure data handling practices",
+      "Created automated testing workflows using Playwright",
+      "Designed and optimized database schemas for performance",
+      "Implemented robust error handling and logging"
     ],
-    demoLink: "#",
-    githubLink: "#",
+    demoLink: null, // NDA compliant - no demo link
+    githubLink: null, // NDA compliant - no GitHub link
     screenshots: [
-      "https://placehold.co/800x600/e2e8f0/1e293b?text=Insurance+Platform+Dashboard",
-      "https://placehold.co/800x600/e2e8f0/1e293b?text=Quote+Comparison+View"
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Conceptual+Dashboard+Design",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Abstract+Quote+Comparison+UI"
     ]
   },
   {
     title: "Food-Based Application",
-    description: "An online ordering portal for users and a complete restaurant asset management system for admins.",
+    description: "Online ordering system with restaurant asset management for admins.",
     role: "Backend Developer",
     category: "backend",
     tech: [
@@ -62,24 +62,24 @@ const projects = [
       { name: "DBeaver" },
       { name: "Swagger API" }
     ],
-    detailedDescription: "This comprehensive food delivery and restaurant management platform serves both customers and restaurant administrators. It features a streamlined ordering process for users and a robust management system for restaurant owners.",
+    detailedDescription: "A comprehensive food ordering and restaurant management platform that serves both customers and restaurant administrators. The system enables streamlined ordering process for users and provides robust tools for restaurant owners.",
     responsibilities: [
-      "Developed the 'Delivery-by-Zone' functionality",
-      "Created API endpoints for order processing and restaurant management",
-      "Implemented real-time notifications using NATS",
-      "Designed containerized deployment using Docker",
-      "Implemented comprehensive testing with JEST"
+      "Architected the 'Delivery-by-Zone' functionality",
+      "Developed API endpoints for order processing",
+      "Implemented event-driven architecture using NATS",
+      "Created containerized deployment using Docker",
+      "Designed and implemented comprehensive test suites"
     ],
-    demoLink: "#",
-    githubLink: "#",
+    demoLink: null, // NDA compliant - no demo link
+    githubLink: null, // NDA compliant - no GitHub link
     screenshots: [
-      "https://placehold.co/800x600/e2e8f0/1e293b?text=Food+Delivery+Admin+Panel",
-      "https://placehold.co/800x600/e2e8f0/1e293b?text=Restaurant+Dashboard"
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Abstract+Admin+UI",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Conceptual+Dashboard"
     ]
   },
   {
     title: "Applications Management System",
-    description: "A concept application designed for senior executives to efficiently oversee and manage 4-5 applications.",
+    description: "Internal tool to help executives oversee and manage multiple applications.",
     role: "Mobile Application Developer",
     category: "frontend",
     tech: [
@@ -94,24 +94,24 @@ const projects = [
       { name: "Microsoft Single Sign-On" },
       { name: "JWT Token" }
     ],
-    detailedDescription: "This proof-of-concept application provides senior executives with a unified interface to oversee multiple applications. It streamlines workflow and improves efficiency by consolidating access and management functions.",
+    detailedDescription: "A proof-of-concept mobile application that provides senior executives with a unified interface to oversee multiple applications. The tool streamlines workflow and improves efficiency through intuitive navigation and data visualization.",
     responsibilities: [
-      "Developed mobile UI/UX for executive dashboard",
+      "Developed the mobile interface with React Native",
       "Implemented Microsoft Single Sign-On for secure authentication",
-      "Created offline data storage using SQLite and AsyncStorage",
+      "Built local data storage using SQLite and AsyncStorage",
       "Integrated QR scanning functionality for quick access",
-      "Built API integration layer for connecting with multiple systems"
+      "Created API integration layer to connect with enterprise systems"
     ],
-    demoLink: "#",
-    githubLink: "#",
+    demoLink: null, // NDA compliant - no demo link
+    githubLink: null, // NDA compliant - no GitHub link
     screenshots: [
-      "https://placehold.co/800x600/e2e8f0/1e293b?text=Executive+Dashboard",
-      "https://placehold.co/800x600/e2e8f0/1e293b?text=Application+Overview"
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Conceptual+Mobile+UI",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Abstract+Dashboard+Design"
     ]
   },
   {
     title: "Street Vendor Management",
-    description: "An innovative platform connecting street vendors with customers, bridging the gap between local products and consumers.",
+    description: "Connecting local street vendors with consumers through an online marketplace.",
     role: "Mobile Application Developer",
     category: "frontend",
     tech: [
@@ -128,24 +128,24 @@ const projects = [
       { name: "JIRA" },
       { name: "Swagger API" }
     ],
-    detailedDescription: "This platform bridges the gap between street vendors and consumers by providing location-based discovery of local products. It empowers small vendors with digital presence and customers with convenient access to local goods.",
+    detailedDescription: "A marketplace platform that connects street vendors with customers looking for local products. The application provides location-based discovery, real-time notifications, and a streamlined ordering process.",
     responsibilities: [
       "Implemented location-based vendor discovery using Google Maps",
       "Developed real-time notifications for order updates",
-      "Created file upload system for vendor product images",
+      "Created file upload system for product images",
       "Integrated with Firebase for real-time data synchronization",
       "Built responsive UI for both vendor and customer interfaces"
     ],
-    demoLink: "#",
-    githubLink: "#",
+    demoLink: null, // NDA compliant - no demo link
+    githubLink: null, // NDA compliant - no GitHub link
     screenshots: [
-      "https://placehold.co/800x600/e2e8f0/1e293b?text=Vendor+Map+View",
-      "https://placehold.co/800x600/e2e8f0/1e293b?text=Customer+Order+Interface"
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Conceptual+Map+View",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Abstract+Vendor+Interface"
     ]
   },
   {
     title: "Healthcare Asset Management",
-    description: "A comprehensive system for managing and accessing biomedical equipment data, including breakdown and preventive maintenance records.",
+    description: "Biomedical equipment tracking system with maintenance logs.",
     role: "Mobile Application Developer",
     category: "frontend",
     tech: [
@@ -167,44 +167,116 @@ const projects = [
       { name: "DBeaver" },
       { name: "File Upload & Download" }
     ],
-    detailedDescription: "This healthcare asset management system digitizes the tracking and maintenance of biomedical equipment. It provides comprehensive tools for logging breakdowns, scheduling preventive maintenance, and managing equipment lifecycle.",
+    detailedDescription: "A healthcare asset management system that digitizes the tracking and maintenance of biomedical equipment. The application provides tools for logging breakdowns, scheduling preventive maintenance, and managing equipment lifecycle.",
     responsibilities: [
       "Developed mobile interface for technicians and healthcare staff",
-      "Implemented QR code scanning for quick equipment identification",
+      "Implemented QR code scanning for equipment identification",
       "Created offline data functionality for use in areas with poor connectivity",
       "Built digital signature capture for maintenance verification",
-      "Optimized performance for low-end devices commonly used in healthcare settings"
+      "Optimized performance for various device types and network conditions"
     ],
-    demoLink: "#",
-    githubLink: "#",
+    demoLink: null, // NDA compliant - no demo link
+    githubLink: null, // NDA compliant - no GitHub link
     screenshots: [
-      "https://placehold.co/800x600/e2e8f0/1e293b?text=Asset+Tracking+Interface",
-      "https://placehold.co/800x600/e2e8f0/1e293b?text=Maintenance+Form+with+Signature"
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Conceptual+Asset+Tracking+UI",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Abstract+Maintenance+Form"
     ]
   }
 ];
 
+// Define personal projects (GitHub showcase)
+const personalProjects = [
+  {
+    title: "IoT Dashboard for Tire Manufacturing",
+    description: "Real-time monitoring dashboard for IoT sensors in a tire manufacturing process (in progress).",
+    role: "Full-Stack Developer",
+    category: "fullstack",
+    tech: [
+      { name: "React Native" },
+      { name: "NestJS" },
+      { name: "PostgreSQL" },
+      { name: "WebSockets" },
+      { name: "TypeScript" },
+      { name: "Docker" },
+      { name: "Chart.js" },
+      { name: "Redis" }
+    ],
+    detailedDescription: "A comprehensive IoT dashboard that provides real-time monitoring of sensors deployed throughout a tire manufacturing process. The dashboard visualizes critical metrics, sends alerts for anomalies, and provides historical data analysis.",
+    responsibilities: [
+      "Designing and implementing real-time data visualization",
+      "Creating backend services for data processing and storage",
+      "Implementing WebSocket communication for live updates",
+      "Building responsive UI that works across multiple devices",
+      "Developing data analysis features for historical trends"
+    ],
+    demoLink: "#",
+    githubLink: "https://github.com/dhonitaker/iot-dashboard",
+    screenshots: [
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=IoT+Dashboard+UI",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Sensor+Metrics+Charts"
+    ]
+  },
+  {
+    title: "Expense Tracker App",
+    description: "Personal finance application for tracking expenses and generating insights.",
+    role: "Mobile Application Developer",
+    category: "frontend",
+    tech: [
+      { name: "React Native" },
+      { name: "SQLite" },
+      { name: "TypeScript" },
+      { name: "Chart.js" },
+      { name: "AsyncStorage" },
+      { name: "Jest" },
+      { name: "GitHub Actions" }
+    ],
+    detailedDescription: "A mobile application for tracking personal expenses with features like categorization, budget planning, and financial insights. The app works offline and provides visualization of spending patterns.",
+    responsibilities: [
+      "Designing intuitive UI for expense tracking",
+      "Implementing local database for offline functionality",
+      "Creating visualization components for financial insights",
+      "Building automated tests with Jest",
+      "Setting up CI/CD pipeline with GitHub Actions"
+    ],
+    demoLink: "https://expense-tracker-demo.vercel.app",
+    githubLink: "https://github.com/dhonitaker/expense-tracker",
+    screenshots: [
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Expense+Tracker+Dashboard",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Budget+Analysis+Charts"
+    ]
+  }
+];
+
+// Combine both project types
+const allProjects = [...professionalProjects, ...personalProjects];
+
 // Filter type definition
 type FilterCategory = "all" | "frontend" | "backend" | "fullstack";
+type ProjectType = "all" | "professional" | "personal";
 type TechFilter = string | null;
 
 const Projects = () => {
   const [categoryFilter, setCategoryFilter] = useState<FilterCategory>("all");
+  const [typeFilter, setTypeFilter] = useState<ProjectType>("all");
   const [techFilter, setTechFilter] = useState<TechFilter>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   
   // Get unique tech stacks for filter
   const uniqueTechStacks = Array.from(
     new Set(
-      projects.flatMap(project => project.tech.map(tech => tech.name))
+      allProjects.flatMap(project => project.tech.map(tech => tech.name))
     )
   ).sort();
 
-  // Filter projects based on selected category and tech
-  const filteredProjects = projects.filter(project => {
+  // Filter projects based on selected category, type and tech
+  const filteredProjects = allProjects.filter(project => {
     const matchesCategory = categoryFilter === "all" || project.category === categoryFilter;
     const matchesTech = !techFilter || project.tech.some(tech => tech.name === techFilter);
-    return matchesCategory && matchesTech;
+    const isProfessional = professionalProjects.some(p => p.title === project.title);
+    const matchesType = typeFilter === "all" || 
+                        (typeFilter === "professional" && isProfessional) || 
+                        (typeFilter === "personal" && !isProfessional);
+    return matchesCategory && matchesTech && matchesType;
   });
 
   return (
@@ -235,6 +307,34 @@ const Projects = () => {
             </div>
 
             <CollapsibleContent className="space-y-4">
+              {/* Project type filters */}
+              <div className="flex flex-wrap justify-center gap-4 mb-4">
+                <Button 
+                  variant={typeFilter === "all" ? "default" : "outline"} 
+                  onClick={() => setTypeFilter("all")}
+                  className="gap-2 transition-all"
+                >
+                  <BadgeCheck className="h-4 w-4" />
+                  All Projects
+                </Button>
+                <Button 
+                  variant={typeFilter === "professional" ? "default" : "outline"} 
+                  onClick={() => setTypeFilter("professional")}
+                  className="gap-2 transition-all"
+                >
+                  <Briefcase className="h-4 w-4" />
+                  Professional Work
+                </Button>
+                <Button 
+                  variant={typeFilter === "personal" ? "default" : "outline"} 
+                  onClick={() => setTypeFilter("personal")}
+                  className="gap-2 transition-all"
+                >
+                  <FolderGit2 className="h-4 w-4" />
+                  Personal Projects
+                </Button>
+              </div>
+
               {/* Category filters */}
               <div className="flex flex-wrap justify-center gap-4 mb-4">
                 <Button 
@@ -242,8 +342,8 @@ const Projects = () => {
                   onClick={() => setCategoryFilter("all")}
                   className="gap-2 transition-all"
                 >
-                  <BadgeCheck className="h-4 w-4" />
-                  All Projects
+                  <Code className="h-4 w-4" />
+                  All Categories
                 </Button>
                 <Button 
                   variant={categoryFilter === "frontend" ? "default" : "outline"} 
@@ -260,6 +360,14 @@ const Projects = () => {
                 >
                   <Server className="h-4 w-4" />
                   Backend
+                </Button>
+                <Button 
+                  variant={categoryFilter === "fullstack" ? "default" : "outline"} 
+                  onClick={() => setCategoryFilter("fullstack")}
+                  className="gap-2 transition-all"
+                >
+                  <Database className="h-4 w-4" />
+                  Full-Stack
                 </Button>
               </div>
 
