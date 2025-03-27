@@ -1,9 +1,8 @@
 
 import { useState, useEffect } from "react";
 import ThemeToggle from "./ThemeToggle";
-import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
+import { Menu, X, Github, Linkedin, Mail, Phone } from "lucide-react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,9 +27,10 @@ const Header = () => {
   ];
 
   const socialLinks = [
-    { icon: <Github className="h-5 w-5" />, label: "GitHub", href: "https://github.com", hoverColor: "hover:text-[#333]" },
-    { icon: <Linkedin className="h-5 w-5" />, label: "LinkedIn", href: "https://linkedin.com", hoverColor: "hover:text-[#0A66C2]" },
-    { icon: <Mail className="h-5 w-5" />, label: "Email", href: "mailto:contact@example.com", hoverColor: "hover:text-primary" }
+    { icon: <Github className="h-5 w-5" />, label: "GitHub", href: "https://github.com/dhonitaker", hoverColor: "hover:text-[#333]" },
+    { icon: <Linkedin className="h-5 w-5" />, label: "LinkedIn", href: "https://linkedin.com/in/dhonitaker", hoverColor: "hover:text-[#0A66C2]" },
+    { icon: <Mail className="h-5 w-5" />, label: "Email", href: "mailto:dhonitaker@gmail.com", hoverColor: "hover:text-primary" },
+    { icon: <Phone className="h-5 w-5" />, label: "Phone", href: "tel:+919123456780", hoverColor: "hover:text-green-500" }
   ];
 
   return (
@@ -46,7 +46,7 @@ const Header = () => {
           href="#" 
           className="text-xl font-bold text-primary transition-colors hover:opacity-90"
         >
-          Portfolio
+          Dhonitaker
         </a>
 
         {/* Desktop Navigation */}

@@ -1,8 +1,9 @@
 
-import { ChevronRight, ExternalLink } from "lucide-react";
+import { ChevronRight, ExternalLink, Github } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import ProjectDetail from "./ProjectDetail";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface Technology {
   name: string;
@@ -40,14 +41,14 @@ const ProjectCard = ({
 
   return (
     <>
-      <div 
-        className="glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg dark:hover:shadow-primary/10 group animate-scale-in cursor-pointer transform hover:-translate-y-1"
+      <Card 
+        className="overflow-hidden transition-all duration-300 hover:shadow-lg dark:hover:shadow-primary/10 group animate-scale-in cursor-pointer transform hover:-translate-y-2 bg-white/60 dark:bg-gray-900/60 backdrop-blur-md border border-gray-200 dark:border-gray-800"
         style={{ animationDelay: `${delay}ms` }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => setModalOpen(true)}
       >
-        <div className="p-6">
+        <CardContent className="p-6">
           <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
             {title}
           </h3>
@@ -79,16 +80,44 @@ const ProjectCard = ({
             )}
           </div>
           
-          <div className="flex items-center text-sm font-medium text-primary transition-all duration-300 mt-auto">
-            <span>View Details</span>
-            <ChevronRight 
-              className={`ml-1 h-4 w-4 transition-transform duration-300 ${
-                isHovered ? 'translate-x-1' : ''
-              }`} 
-            />
+          <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100 dark:border-gray-800">
+            <div className="flex items-center text-sm font-medium text-primary transition-all duration-300">
+              <span>View Details</span>
+              <ChevronRight 
+                className={`ml-1 h-4 w-4 transition-transform duration-300 ${
+                  isHovered ? 'translate-x-1' : ''
+                }`} 
+              />
+            </div>
+            
+            <div className="flex space-x-2">
+              {demoLink && (
+                <a 
+                  href={demoLink} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1.5 rounded-full text-gray-500 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              )}
+              
+              {githubLink && (
+                <a 
+                  href={githubLink} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1.5 rounded-full text-gray-500 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Github className="h-4 w-4" />
+                </a>
+              )}
+            </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       <ProjectDetail 
         isOpen={modalOpen}

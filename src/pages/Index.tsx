@@ -48,15 +48,19 @@ const Index = () => {
     return (
       <div className="h-screen w-screen flex items-center justify-center bg-background">
         <div className="flex flex-col items-center">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <div className="relative w-16 h-16">
+            <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+            <div className="absolute top-0 left-0 w-16 h-16 border-4 border-primary/30 rounded-full"></div>
+          </div>
           <p className="mt-4 text-muted-foreground">Loading portfolio...</p>
+          <p className="text-sm text-muted-foreground/70 mt-2">Dhonitaker • Full-Stack Developer</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-background to-background/95">
       <Header />
       <main className="flex-grow pt-16">
         <HeroSection />

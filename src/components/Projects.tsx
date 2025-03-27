@@ -2,7 +2,8 @@
 import { useState } from "react";
 import ProjectCard from "./ProjectCard";
 import { Button } from "@/components/ui/button";
-import { BadgeCheck, Monitor, Server, RefreshCcw } from "lucide-react";
+import { BadgeCheck, Monitor, Server, RefreshCcw, Filter } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 // Define the main project data with more detailed information
 const projects = [
@@ -34,7 +35,11 @@ const projects = [
       "Integrated with multiple insurance provider APIs"
     ],
     demoLink: "#",
-    githubLink: "#"
+    githubLink: "#",
+    screenshots: [
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Insurance+Platform+Dashboard",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Quote+Comparison+View"
+    ]
   },
   {
     title: "Food-Based Application",
@@ -66,7 +71,11 @@ const projects = [
       "Implemented comprehensive testing with JEST"
     ],
     demoLink: "#",
-    githubLink: "#"
+    githubLink: "#",
+    screenshots: [
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Food+Delivery+Admin+Panel",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Restaurant+Dashboard"
+    ]
   },
   {
     title: "Applications Management System",
@@ -94,7 +103,11 @@ const projects = [
       "Built API integration layer for connecting with multiple systems"
     ],
     demoLink: "#",
-    githubLink: "#"
+    githubLink: "#",
+    screenshots: [
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Executive+Dashboard",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Application+Overview"
+    ]
   },
   {
     title: "Street Vendor Management",
@@ -124,7 +137,11 @@ const projects = [
       "Built responsive UI for both vendor and customer interfaces"
     ],
     demoLink: "#",
-    githubLink: "#"
+    githubLink: "#",
+    screenshots: [
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Vendor+Map+View",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Customer+Order+Interface"
+    ]
   },
   {
     title: "Healthcare Asset Management",
@@ -159,24 +176,36 @@ const projects = [
       "Optimized performance for low-end devices commonly used in healthcare settings"
     ],
     demoLink: "#",
-    githubLink: "#"
+    githubLink: "#",
+    screenshots: [
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Asset+Tracking+Interface",
+      "https://placehold.co/800x600/e2e8f0/1e293b?text=Maintenance+Form+with+Signature"
+    ]
   }
 ];
 
 // Filter type definition
-type FilterCategory = "all" | "frontend" | "backend";
+type FilterCategory = "all" | "frontend" | "backend" | "fullstack";
+type TechFilter = string | null;
 
 const Projects = () => {
-  const [filter, setFilter] = useState<FilterCategory>("all");
+  const [categoryFilter, setCategoryFilter] = useState<FilterCategory>("all");
+  const [techFilter, setTechFilter] = useState<TechFilter>(null);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   
-  // Filter projects based on selected category
-  const filteredProjects = filter === "all" 
-    ? projects 
-    : projects.filter(project => 
-        filter === "frontend" 
-          ? project.role.toLowerCase().includes("mobile") 
-          : project.role.toLowerCase().includes("backend")
-      );
+  // Get unique tech stacks for filter
+  const uniqueTechStacks = Array.from(
+    new Set(
+      projects.flatMap(project => project.tech.map(tech => tech.name))
+    )
+  ).sort();
+
+  // Filter projects based on selected category and tech
+  const filteredProjects = projects.filter(project => {
+    const matchesCategory = categoryFilter === "all" || project.category === categoryFilter;
+    const matchesTech = !techFilter || project.tech.some(tech => tech.name === techFilter);
+    return matchesCategory && matchesTech;
+  });
 
   return (
     <section id="projects" className="section-padding bg-secondary/30 dark:bg-accent/10">
@@ -193,32 +222,71 @@ const Projects = () => {
           </p>
         </div>
 
-        {/* Filter buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-10">
-          <Button 
-            variant={filter === "all" ? "default" : "outline"} 
-            onClick={() => setFilter("all")}
-            className="gap-2 transition-all"
-          >
-            <BadgeCheck className="h-4 w-4" />
-            All Projects
-          </Button>
-          <Button 
-            variant={filter === "frontend" ? "default" : "outline"} 
-            onClick={() => setFilter("frontend")}
-            className="gap-2 transition-all"
-          >
-            <Monitor className="h-4 w-4" />
-            Frontend/Mobile
-          </Button>
-          <Button 
-            variant={filter === "backend" ? "default" : "outline"} 
-            onClick={() => setFilter("backend")}
-            className="gap-2 transition-all"
-          >
-            <Server className="h-4 w-4" />
-            Backend
-          </Button>
+        {/* Filter section with toggle */}
+        <div className="mb-8">
+          <Collapsible open={isFilterOpen} onOpenChange={setIsFilterOpen} className="w-full">
+            <div className="flex justify-center mb-6">
+              <CollapsibleTrigger asChild>
+                <Button variant="outline" className="gap-2">
+                  <Filter className="h-4 w-4" />
+                  {isFilterOpen ? "Hide Filters" : "Show Filters"}
+                </Button>
+              </CollapsibleTrigger>
+            </div>
+
+            <CollapsibleContent className="space-y-4">
+              {/* Category filters */}
+              <div className="flex flex-wrap justify-center gap-4 mb-4">
+                <Button 
+                  variant={categoryFilter === "all" ? "default" : "outline"} 
+                  onClick={() => setCategoryFilter("all")}
+                  className="gap-2 transition-all"
+                >
+                  <BadgeCheck className="h-4 w-4" />
+                  All Projects
+                </Button>
+                <Button 
+                  variant={categoryFilter === "frontend" ? "default" : "outline"} 
+                  onClick={() => setCategoryFilter("frontend")}
+                  className="gap-2 transition-all"
+                >
+                  <Monitor className="h-4 w-4" />
+                  Frontend/Mobile
+                </Button>
+                <Button 
+                  variant={categoryFilter === "backend" ? "default" : "outline"} 
+                  onClick={() => setCategoryFilter("backend")}
+                  className="gap-2 transition-all"
+                >
+                  <Server className="h-4 w-4" />
+                  Backend
+                </Button>
+              </div>
+
+              {/* Tech stack filters */}
+              <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+                <Button
+                  variant={!techFilter ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setTechFilter(null)}
+                  className="text-xs mb-2"
+                >
+                  All Tech
+                </Button>
+                {uniqueTechStacks.map((tech) => (
+                  <Button
+                    key={tech}
+                    variant={techFilter === tech ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setTechFilter(tech)}
+                    className="text-xs mb-2"
+                  >
+                    {tech}
+                  </Button>
+                ))}
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
         </div>
 
         {/* Projects grid with animation when filter changes */}
@@ -236,13 +304,14 @@ const Projects = () => {
                 responsibilities={project.responsibilities}
                 demoLink={project.demoLink}
                 githubLink={project.githubLink}
+                screenshots={project.screenshots}
                 delay={index * 100}
               />
             ))
           ) : (
             <div className="col-span-3 text-center py-12">
               <RefreshCcw className="h-10 w-10 mx-auto mb-4 text-muted-foreground animate-spin" />
-              <p className="text-muted-foreground">No projects match the selected filter.</p>
+              <p className="text-muted-foreground">No projects match the selected filters.</p>
             </div>
           )}
         </div>

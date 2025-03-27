@@ -20,7 +20,7 @@ const HeroSection = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-            Crafting digital experiences with code and creativity
+            Hi, I'm <span className="text-primary">Dhonitaker</span>
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-fade-in" style={{ animationDelay: "200ms" }}>
@@ -40,6 +40,33 @@ const HeroSection = () => {
             >
               Contact Me
             </a>
+          </div>
+          
+          <div className="mt-10 flex flex-wrap gap-6 animate-fade-in" style={{ animationDelay: "600ms" }}>
+            <div className="flex items-center">
+              <Mail className="h-5 w-5 text-primary mr-2" />
+              <a href="mailto:dhonitaker@gmail.com" className="text-sm hover:text-primary transition-colors">
+                dhonitaker@gmail.com
+              </a>
+            </div>
+            <div className="flex items-center">
+              <Phone className="h-5 w-5 text-primary mr-2" />
+              <a href="tel:+919123456780" className="text-sm hover:text-primary transition-colors">
+                +91 9123456780
+              </a>
+            </div>
+            <div className="flex items-center">
+              <Github className="h-5 w-5 text-primary mr-2" />
+              <a href="https://github.com/dhonitaker" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-primary transition-colors">
+                github.com/dhonitaker
+              </a>
+            </div>
+            <div className="flex items-center">
+              <Linkedin className="h-5 w-5 text-primary mr-2" />
+              <a href="https://linkedin.com/in/dhonitaker" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-primary transition-colors">
+                linkedin.com/in/dhonitaker
+              </a>
+            </div>
           </div>
         </div>
       </div>
