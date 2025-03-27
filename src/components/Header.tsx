@@ -1,7 +1,9 @@
 
 import { useState, useEffect } from "react";
 import ThemeToggle from "./ThemeToggle";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,6 +25,12 @@ const Header = () => {
     { label: "Testimonials", href: "#testimonials" },
     { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
+  ];
+
+  const socialLinks = [
+    { icon: <Github className="h-5 w-5" />, label: "GitHub", href: "https://github.com", hoverColor: "hover:text-[#333]" },
+    { icon: <Linkedin className="h-5 w-5" />, label: "LinkedIn", href: "https://linkedin.com", hoverColor: "hover:text-[#0A66C2]" },
+    { icon: <Mail className="h-5 w-5" />, label: "Email", href: "mailto:contact@example.com", hoverColor: "hover:text-primary" }
   ];
 
   return (
@@ -55,6 +63,29 @@ const Header = () => {
               </li>
             ))}
           </ul>
+          
+          {/* Social links */}
+          <div className="flex items-center space-x-4 mr-4">
+            {socialLinks.map((link, index) => (
+              <HoverCard key={index}>
+                <HoverCardTrigger asChild>
+                  <a 
+                    href={link.href} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`p-2 rounded-full transition-all hover:bg-secondary ${link.hoverColor}`}
+                    aria-label={link.label}
+                  >
+                    {link.icon}
+                  </a>
+                </HoverCardTrigger>
+                <HoverCardContent className="w-auto p-2">
+                  <span className="text-sm">{link.label}</span>
+                </HoverCardContent>
+              </HoverCard>
+            ))}
+          </div>
+          
           <ThemeToggle />
         </nav>
 
@@ -90,6 +121,24 @@ const Header = () => {
                 </a>
               </li>
             ))}
+            
+            {/* Social links for mobile */}
+            <li className="py-2">
+              <div className="flex items-center space-x-4 pt-2 border-t border-gray-200 dark:border-gray-700">
+                {socialLinks.map((link, index) => (
+                  <a 
+                    key={index}
+                    href={link.href} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`p-2 rounded-full transition-all hover:bg-secondary ${link.hoverColor}`}
+                    aria-label={link.label}
+                  >
+                    {link.icon}
+                  </a>
+                ))}
+              </div>
+            </li>
           </ul>
         </div>
       )}

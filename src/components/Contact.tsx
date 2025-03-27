@@ -1,24 +1,23 @@
 
-import { useState } from "react";
-import { Github, Mail, MapPin, Phone } from "lucide-react";
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Send, CheckCircle, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 
 const Contact = () => {
-  const [formState, setFormState] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: "",
+    message: ""
   });
-  
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value,
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -28,163 +27,178 @@ const Contact = () => {
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormState({
-        name: "",
-        email: "",
-        message: "",
+      setIsSubmitted(true);
+      
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+        variant: "default",
       });
       
-      // Reset success message after a while
+      // Reset form after a delay
       setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 5000);
+        setFormData({ name: "", email: "", message: "" });
+        setIsSubmitted(false);
+      }, 3000);
     }, 1500);
   };
 
-  const contactInfo = [
+  const contactDetails = [
     {
-      icon: <Mail className="h-5 w-5" />,
-      label: "Email",
+      icon: <Mail className="h-5 w-5 text-primary" />,
+      title: "Email",
       value: "contact@example.com",
+      link: "mailto:contact@example.com"
     },
     {
-      icon: <Phone className="h-5 w-5" />,
-      label: "Phone",
-      value: "+1 (123) 456-7890",
-    },
-    {
-      icon: <MapPin className="h-5 w-5" />,
-      label: "Location",
-      value: "New York, NY",
-    },
-    {
-      icon: <Github className="h-5 w-5" />,
-      label: "Github",
+      icon: <Github className="h-5 w-5 text-primary" />,
+      title: "GitHub",
       value: "github.com/username",
+      link: "https://github.com/username"
     },
+    {
+      icon: <Linkedin className="h-5 w-5 text-primary" />,
+      title: "LinkedIn",
+      value: "linkedin.com/in/username",
+      link: "https://linkedin.com/in/username"
+    },
+    {
+      icon: <MapPin className="h-5 w-5 text-primary" />,
+      title: "Location",
+      value: "San Francisco, CA",
+      link: null
+    }
   ];
 
   return (
-    <section id="contact" className="section-padding">
+    <section id="contact" className="section-padding bg-background">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-2">
-            <div className="h-[1px] w-12 bg-primary mr-4"></div>
-            <span className="text-primary font-medium">Contact</span>
-            <div className="h-[1px] w-12 bg-primary ml-4"></div>
+        <div className="animate-on-scroll">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center mb-2">
+              <div className="h-[1px] w-12 bg-primary mr-4"></div>
+              <span className="text-primary font-medium">Contact</span>
+              <div className="h-[1px] w-12 bg-primary ml-4"></div>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Interested in working together? Feel free to reach out for collaborations or just a friendly hello.
+            </p>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Interested in working together? Fill out the form below or reach out through one of my contact channels.
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="glass-card rounded-2xl p-8">
-            <h3 className="text-xl font-semibold mb-6">Send a Message</h3>
-            
-            {submitSuccess ? (
-              <div className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 p-4 rounded-lg mb-6">
-                Thank you! Your message has been sent successfully.
-              </div>
-            ) : null}
-            
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formState.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-secondary/50 dark:bg-accent/50 focus:outline-none focus:ring-2 focus:ring-primary/50"
-                  placeholder="Your name"
-                  required
-                />
-              </div>
-              
-              <div className="mb-4">
-                <label htmlFor="email" className="block text-sm font-medium mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-secondary/50 dark:bg-accent/50 focus:outline-none focus:ring-2 focus:ring-primary/50"
-                  placeholder="Your email"
-                  required
-                />
-              </div>
-              
-              <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formState.message}
-                  onChange={handleChange}
-                  rows={5}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-secondary/50 dark:bg-accent/50 focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
-                  placeholder="Your message"
-                  required
-                ></textarea>
-              </div>
-              
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full py-3 rounded-lg font-medium transition-all ${
-                  isSubmitting
-                    ? "bg-primary/70 cursor-not-allowed"
-                    : "bg-primary hover:bg-primary/90"
-                } text-primary-foreground`}
-              >
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </button>
-            </form>
-          </div>
-          
-          <div>
-            <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {contactInfo.map((item) => (
-                <div
-                  key={item.label}
-                  className="glass-card rounded-xl p-6 transition-all hover:shadow-md"
-                >
-                  <div className="p-3 w-fit rounded-full bg-primary/10 text-primary mb-4">
-                    {item.icon}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact Form */}
+            <div className="glass-card rounded-2xl p-8 animate-fade-in">
+              <h3 className="text-xl font-semibold mb-6">Send Me a Message</h3>
+              <form onSubmit={handleSubmit}>
+                <div className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2">
+                      Name
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="Your name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full"
+                    />
                   </div>
-                  <h4 className="font-medium mb-1">{item.label}</h4>
-                  <p className="text-sm text-muted-foreground">{item.value}</p>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      Email
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="Your email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium mb-2">
+                      Message
+                    </label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      placeholder="Your message..."
+                      required
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="min-h-[150px] w-full"
+                    />
+                  </div>
+                  
+                  <Button 
+                    type="submit" 
+                    className="w-full gap-2"
+                    disabled={isSubmitting || isSubmitted}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+                        Sending...
+                      </>
+                    ) : isSubmitted ? (
+                      <>
+                        <CheckCircle className="h-4 w-4" />
+                        Sent Successfully
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
                 </div>
-              ))}
+              </form>
             </div>
             
-            <div className="mt-8 glass-card rounded-xl p-6">
-              <h4 className="font-medium mb-4">Working Hours</h4>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex justify-between">
-                  <span>Monday - Friday:</span>
-                  <span>9:00 AM - 6:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Saturday:</span>
-                  <span>10:00 AM - 4:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Sunday:</span>
-                  <span>Closed</span>
-                </div>
+            {/* Contact Details */}
+            <div className="flex flex-col justify-center">
+              <h3 className="text-xl font-semibold mb-6">Connect With Me</h3>
+              <p className="text-muted-foreground mb-8">
+                Whether you have a question, proposal, or just want to say hello, feel free to connect with me through any of these channels.
+              </p>
+              
+              <div className="space-y-6">
+                {contactDetails.map((detail, index) => (
+                  <div 
+                    key={index} 
+                    className="flex items-start glass-card p-4 rounded-xl animate-fade-in transition-all duration-300 hover:shadow-md" 
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <div className="p-3 bg-secondary rounded-full mr-4">
+                      {detail.icon}
+                    </div>
+                    <div>
+                      <h4 className="font-medium">{detail.title}</h4>
+                      {detail.link ? (
+                        <a 
+                          href={detail.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-sm text-primary hover:underline"
+                        >
+                          {detail.value}
+                        </a>
+                      ) : (
+                        <p className="text-sm text-muted-foreground">{detail.value}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

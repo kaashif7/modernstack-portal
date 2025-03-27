@@ -123,6 +123,58 @@
   .section-padding {
     @apply py-20 px-6 md:px-12 lg:px-20;
   }
+
+  /* Interactive button with shine effect */
+  .btn-shine {
+    @apply relative overflow-hidden;
+  }
+  
+  .btn-shine::after {
+    content: '';
+    @apply absolute top-0 left-0 w-[200%] h-full bg-white/20 transform -translate-x-full rotate-30 transition-transform duration-1000;
+  }
+  
+  .btn-shine:hover::after {
+    @apply translate-x-0;
+  }
+
+  /* Link hover effect */
+  .link-hover {
+    @apply relative inline-block;
+  }
+  
+  .link-hover::after {
+    content: '';
+    @apply absolute w-full scale-x-0 h-0.5 bottom-0 left-0 bg-primary origin-bottom-right transition-transform duration-300;
+  }
+  
+  .link-hover:hover::after {
+    @apply scale-x-100 origin-bottom-left;
+  }
+  
+  /* Card tilt effect */
+  .tilt {
+    @apply transition-transform duration-200 ease-out;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+  }
+  
+  .tilt-inner {
+    transform-style: preserve-3d;
+  }
+  
+  /* Image hover zoom effect */
+  .img-zoom {
+    @apply overflow-hidden;
+  }
+  
+  .img-zoom img {
+    @apply transition-transform duration-500 ease-out;
+  }
+  
+  .img-zoom:hover img {
+    @apply scale-110;
+  }
 }
 
 /* Custom animations */
@@ -135,6 +187,69 @@
 .animate-on-scroll.animate-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Enhanced animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(var(--primary), 0.2);
+  }
+  50% {
+    box-shadow: 0 0 15px 5px rgba(var(--primary), 0.4);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-animate {
+  background-size: 200% 200%;
+  animation: gradient-animation 15s ease infinite;
+}
+
+/* Track hover animations */
+.track {
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.track:hover {
+  animation-play-state: paused;
 }
 
 /* Hide scrollbar but allow scrolling */
