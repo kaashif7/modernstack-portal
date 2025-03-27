@@ -1,5 +1,5 @@
 
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Mail, Phone, Github, Linkedin } from "lucide-react";
 
 const HeroSection = () => {
   return (
