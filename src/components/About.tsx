@@ -1,9 +1,10 @@
 
-import { Code, Cpu, Git, Server } from "lucide-react";
+import { Code, Cpu, Github, Server } from "lucide-react";
+import { Box, Database, FileJson } from "lucide-react";
 
 const About = () => {
   const tools = [
-    { name: "GIT", icon: <Git className="h-5 w-5" /> },
+    { name: "GIT", icon: <Github className="h-5 w-5" /> },
     { name: "JIRA", icon: <Cpu className="h-5 w-5" /> },
     { name: "POSTMAN", icon: <Server className="h-5 w-5" /> },
     { name: "DBeaver", icon: <Database className="h-5 w-5" /> },
@@ -83,5 +84,4 @@ const About = () => {
   );
 };
 
-import { Box, Database, FileJson } from "lucide-react";
 export default About;
