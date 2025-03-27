@@ -69,6 +69,11 @@ const Contact = () => {
     <section id="contact" className="section-padding">
       <div className="container mx-auto">
         <div className="text-center mb-16">
+          <div className="flex items-center justify-center mb-2">
+            <div className="h-[1px] w-12 bg-primary mr-4"></div>
+            <span className="text-primary font-medium">Contact</span>
+            <div className="h-[1px] w-12 bg-primary ml-4"></div>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Interested in working together? Fill out the form below or reach out through one of my contact channels.

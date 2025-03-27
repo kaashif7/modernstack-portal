@@ -31,7 +31,7 @@ const Projects = () => {
     },
     {
       title: "Applications Management System",
-      description: "An application for senior executives to oversee and navigate multiple applications efficiently.",
+      description: "An application enabling senior executives to oversee and manage multiple applications efficiently.",
       role: "Mobile Application Developer",
       tech: [
         { name: "React Native" },
@@ -74,7 +74,12 @@ const Projects = () => {
     <section id="projects" className="section-padding bg-secondary/30 dark:bg-accent/10">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Project Portfolio</h2>
+          <div className="flex items-center justify-center mb-2">
+            <div className="h-[1px] w-12 bg-primary mr-4"></div>
+            <span className="text-primary font-medium">Portfolio</span>
+            <div className="h-[1px] w-12 bg-primary ml-4"></div>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Project Showcase</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Showcasing a diverse range of projects that demonstrate my technical expertise and problem-solving abilities.
           </p>

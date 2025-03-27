@@ -37,7 +37,7 @@ const ProjectCard = ({ title, description, role, tech, delay = 0 }: ProjectCardP
           <span className="ml-2 text-sm">{role}</span>
         </div>
         
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-6">
           {tech.map((item) => (
             <span
               key={item.name}
@@ -48,7 +48,7 @@ const ProjectCard = ({ title, description, role, tech, delay = 0 }: ProjectCardP
           ))}
         </div>
         
-        <div className="flex items-center text-sm font-medium text-primary transition-all duration-300">
+        <div className="flex items-center text-sm font-medium text-primary transition-all duration-300 mt-auto">
           <span>View Details</span>
           <ChevronRight 
             className={`ml-1 h-4 w-4 transition-transform duration-300 ${
